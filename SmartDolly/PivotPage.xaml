@@ -28,10 +28,54 @@
     </Page.Transitions>
     <Grid>
         <Pivot x:Uid="Pivot" Title="SMART DOLLY" x:Name="pivot" Background="#2c3339" CommonNavigationTransitionInfo.IsStaggerElement="True">
-            <!--Pivot item one-->
+            <PivotItem
+                Header="status" Margin="10,10,10,130"
+                DataContext="{Binding DollySettings}"
+                >
+                <Grid x:Name="MainStatus" HorizontalAlignment="Left" Height="370" VerticalAlignment="Top" Width="370">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="227*"/>
+                        <ColumnDefinition Width="143*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="CurrentTimeValue" Grid.Column="0" Grid.Row="1" Text="{Binding ElapsedTime, ConverterParameter='{}{0}', Converter={StaticResource StringFormat}}" VerticalAlignment="Bottom" FontSize="48" Foreground="#FF3E67D6" Margin="5,0,0,0" HorizontalAlignment="Left" Height="58" Width="212">
+                    </TextBlock>
+                    <TextBlock x:Name="ShotsTakenValue" Grid.Column="0" Grid.Row="3" Text="{Binding ShotsTaken, ConverterParameter='{}{0:#0}', Converter={StaticResource StringFormat}}" VerticalAlignment="Center" FontSize="48" Foreground="#FF3E67D6" Margin="5,0,0,0" Height="58" HorizontalAlignment="Left" Width="212">
+                    </TextBlock>
+                    <TextBlock x:Name="CurrentPositionValue" Grid.Column="0" Grid.Row="5" Text="{Binding CurrentPosition, ConverterParameter='{}{0:#0}mm', Converter={StaticResource StringFormat}}" VerticalAlignment="Center" FontSize="48" Foreground="#FF3E67D6" Margin="5,0,0,0" HorizontalAlignment="Left" Height="58" Width="212">
+                    </TextBlock>
+                    <TextBlock x:Name="BatteryLevelValue" Grid.Column="0" Grid.Row="7" Text="{Binding BatVoltage, ConverterParameter='{}{0:#0.0}V', Converter={StaticResource StringFormat}}" VerticalAlignment="Center" FontSize="48" SelectionChanged="BatteryLevelText_SelectionChanged" Foreground="#FF3E67D6" Margin="5,0,0,0" HorizontalAlignment="Left" Height="58" Width="212">
+                    </TextBlock>
+                    <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Text="Run Time:" VerticalAlignment="Center" FontSize="16" Margin="0,1,0,0" Height="19" Width="70"/>
+                    <TextBlock x:Name="TotalTimeText" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Text="Total Time:" VerticalAlignment="Center" FontSize="16" Margin="0,1,0,0" Height="19" Width="76"/>
+                    <TextBlock x:Name="ShotsText" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Text="Shots Taken:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="87"/>
+                    <TextBlock x:Name="TotalShotsText" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Text="Total Shots:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="81"/>
+                    <TextBlock x:Name="PositionText" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" Text="Position:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="60"/>
+                    <TextBlock x:Name="MaxPositionText" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" Text="End position:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="92"/>
+                    <TextBlock x:Name="BatteryText" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Text="Battery:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="54"/>
+                    <TextBlock x:Name="TotalTimeValue" HorizontalAlignment="Left" Text="{Binding TotalTime}" VerticalAlignment="Bottom" FontSize="22" Grid.Row="1" Foreground="#FF3E67D6" Grid.Column="1" Margin="0,0,0,12" Height="26" Width="133">
+                    </TextBlock>
+                    <TextBlock x:Name="TotalShotsValue" HorizontalAlignment="Left" Text="{Binding TotalShots}" VerticalAlignment="Bottom" FontSize="22" Grid.Row="3" Foreground="#FF3E67D6" Grid.Column="1" Margin="0,0,0,12" Height="26" Width="133">
+                    </TextBlock>
+                    <TextBlock x:Name="TotalPositionValue" HorizontalAlignment="Left" Text="{Binding MaxDistance, ConverterParameter='{}{0:#0}mm', Converter={StaticResource StringFormat}}" VerticalAlignment="Bottom" FontSize="22" Grid.Row="5" Foreground="#FF3E67D6" Grid.Column="1" Height="26" Margin="0,0,0,12" Width="133">
+                    </TextBlock>
+                    <TextBlock x:Name="MaxBatValue" HorizontalAlignment="Left" Text="10.5V" VerticalAlignment="Bottom" FontSize="22" Grid.Row="7" Foreground="#FF3E67D6" Grid.Column="1" Margin="0,0,0,12" Height="26" Width="133">
+                    </TextBlock>
+                    <TextBlock x:Name="LowBatteryLimitText" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="1" Text="Low battery limit:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="133"/>
+                </Grid>
+            </PivotItem>
             <PivotItem
                 x:Uid="DollyPivotItem"
-                Margin="19,15,10,-0.5"
+                Margin="10,10,10,130"
                 Header="dolly"
                 DataContext="{Binding DollySettings}"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
@@ -42,13 +86,12 @@
                         <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
@@ -88,15 +131,11 @@
                                Name="DoHoming" Content="Go Home" Width="100"/>
                     <Button    Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" Click="DoMeasuring_Click" 
                                Name="DoMeasuring" Content="Measure" Width="100"/>
-                    <TextBlock Grid.Row="6" Name="BatteryLevelBox" Grid.Column="0" HorizontalAlignment="Center" Margin="3,4.667,0,5.667" TextAlignment="Right" FontSize="{StaticResource ContentDialogTitleMinHeight}"
-                               Text="{Binding BatVoltage,Converter={StaticResource StringFormat},ConverterParameter='{}Battery: {0:#0.0}V'}" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="237" />
                 </Grid>
             </PivotItem>
-
-            <!--Pivot item two-->
             <PivotItem
                 x:Uid="MotorPivotItem"
-                Margin="19,15,0,130.5"
+                Margin="10,10,10,130"
                 Header="motor"
                 DataContext="{Binding MotorSettings}"
                 >
@@ -107,11 +146,11 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
@@ -126,7 +165,7 @@
                     <TextBox   Grid.Row="1" Name="SpeedBox" Grid.Column="1" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
                                Text="{Binding Speed,Mode=TwoWay}" Width="120" Background="{ThemeResource TextBoxBackgroundThemeBrush}" />
                     <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="mm/sec" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
+                               Text="mm/sec" FontSize="14" />
 
                     <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
                                Text="Ramp" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
@@ -152,25 +191,24 @@
                 </Grid>
             </PivotItem>
 
-            <!--Pivot item three-->
             <PivotItem
                 x:Uid="CameraPivotItem"
-                Margin="19,14.5,0,0"
+                Margin="10,10,10,130"
                 Header="camera"
                 DataContext="{Binding CameraSettings}"
                 >
-                <Grid x:Name="CameraSettings" Width="360" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Grid x:Name="CameraSettings" Margin="0,0,0,0" Height="auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="6*" />
                         <ColumnDefinition Width="4*" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
@@ -208,8 +246,8 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-        <RadioButton Name="LeftSwitch" IsChecked="{Binding DollySettings.Limit2,Mode=OneWay, Converter={StaticResource LimitSwitch}}" Content="Left" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.527,9.621" Margin="10,540,0,0" Width="100" BorderBrush="Red" IsEnabled="False"/>
-        <RadioButton Name="RightSwitch" IsChecked="{Binding DollySettings.Limit1,Mode=OneWay, Converter={StaticResource LimitSwitch}}" Content="Right" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.527,9.621" Margin="0,540,10,0" Width="77" BorderBrush="Red"  FlowDirection="RightToLeft" IsEnabled="False"/>
+        <RadioButton Name="LeftSwitch" IsChecked="{Binding DollySettings.Limit2,Mode=OneWay, Converter={StaticResource LimitSwitch}}" Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.527,9.621" Margin="10,540,0,0" Width="100" BorderBrush="Red" IsEnabled="False"/>
+        <RadioButton Name="RightSwitch" IsChecked="{Binding DollySettings.Limit1,Mode=OneWay, Converter={StaticResource LimitSwitch}}" Content="End" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.527,9.621" Margin="0,540,10,0" Width="77" BorderBrush="Red"  FlowDirection="RightToLeft" IsEnabled="False"/>
         <ProgressRing Name="ConnectingProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True" Background="Transparent" Margin="151,480,153,67" Width="96" Height="93" RenderTransformOrigin="-0.245,-8.122"/>
     </Grid>
 

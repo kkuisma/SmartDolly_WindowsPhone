@@ -34,6 +34,9 @@ namespace SmartDolly
         private const string CameraSettingsName = "CameraSettings";
 
         private const string BtDeviceName = "myDolly";
+        private string DollyState = "NotConnected";
+
+        private DispatcherTimer pingTimer = new DispatcherTimer();
 
         private ConnectionManager connectionManager;
 
@@ -42,6 +45,7 @@ namespace SmartDolly
         private Dolly dollyViewModel;
         private Camera cameraViewModel;
         private Motor motorViewModel;
+        private int nonAckPings;
 
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
@@ -69,23 +73,49 @@ namespace SmartDolly
             motorViewModel.SetPropertyEventHandler += viewModel_SetProperty;
             motorViewModel.GetPropertyEventHandler += viewModel_GetProperty;
             ConnectingProgressRing.IsActive = true;
+            pingTimer.Tick += pingTimer_tick;
+            pingTimer.Interval = new TimeSpan(0, 0, 5);
+            nonAckPings = 0;
             Connect();
+        }
+
+        void pingTimer_tick(object sender, object e)
+        {
+            nonAckPings++;
+            Debug.WriteLine("PING TICK #" + nonAckPings);
+            if (nonAckPings > 3)
+            {
+                DollyState = "NotConnected";
+                pingTimer.Stop();
+                ConnectingProgressRing.IsActive = true;
+                Debug.WriteLine("DISCONNECTED!");
+                App.Speak("Dolly disconnected.");
+            }
         }
 
         async void dollyViewModel_PingReceivedEventHandler(object sender, EventArgs e)
         {
-            ConnectingProgressRing.IsActive = false;
+            if(DollyState == "NotConnected")
+            {
+                DollyState = "Connected";
+                ConnectingProgressRing.IsActive = false;
 
-            string pingResponseMsg =
-                TargetObject.Dolly.ToString() +
-                Dolly.Property.Ping.ToString() +
-                Command.GetResponse.ToString() +
-                Protocol.ValueSeparator.ToString();
-            await connectionManager.SendCommand(pingResponseMsg);
+                string pingResponseMsg =
+                    TargetObject.Dolly.ToString() +
+                    Dolly.Property.Ping.ToString() +
+                    Command.GetResponse.ToString() +
+                    Protocol.ValueSeparator.ToString();
+                await connectionManager.SendCommand(pingResponseMsg);
 
-            dollyViewModel.getInitValues();
-            cameraViewModel.getInitValues();
-            motorViewModel.getInitValues();
+                dollyViewModel.getInitValues();
+                cameraViewModel.getInitValues();
+                motorViewModel.getInitValues();
+                pingTimer.Start();
+            }
+            else
+            {
+                nonAckPings = 0;
+            }
         }
 
         async void viewModel_GetProperty(object sender, GetPropertyEventArgs e)
@@ -186,7 +216,7 @@ namespace SmartDolly
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            //connectionManager.Terminate();
+            connectionManager.Terminate();
             Debug.WriteLine("PivotPage OnNavigatedFrom " + e);
             this.navigationHelper.OnNavigatedFrom(e);
         }
@@ -226,11 +256,8 @@ namespace SmartDolly
                                 else
                                 {
                                     Debug.WriteLine("BT Connection FAILED!!!");
+                                    App.Speak("Bluetooth connection failed.");
                                 }   
-
-//                            DeviceName.IsReadOnly = true;
-//                            DeviceName.Visibility = Visibility.Collapsed;
-//                            BTNameText.Visibility = Visibility.Collapsed;
                                 continue;
                             }
                         }
@@ -281,6 +308,11 @@ namespace SmartDolly
         private void DoHoming_Click(object sender, RoutedEventArgs e)
         {
             DollyViewModel.Homing = true;
+        }
+
+        private void BatteryLevelText_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 
