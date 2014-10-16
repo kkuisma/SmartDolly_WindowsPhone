@@ -57,7 +57,26 @@ namespace SmartDolly
         public int Interval
         {
             get { return _interval; }
-            set { SetProperty(ref _interval, value); SetPropertyRemote(Property.Interval, _interval); }
+            set
+            {
+                if (value < 10) value = 10;
+                SetProperty(ref _interval, value); SetPropertyRemote(Property.Interval, _interval);
+                if (IntervalLock)
+                {
+                    if (!TotalShotsLock)
+                    {
+                        TotalShots = Convert.ToInt32(TotalTime.TotalMilliseconds) / Interval;
+                    }
+                    if (!MotionPerCycleLock)
+                    {
+                        MotionPerCycle = MaxDistance / TotalShots;
+                    }
+                    if (!TotalTimeLock)
+                    {
+                        TotalTime = TimeSpan.FromMilliseconds(TotalShots * Interval);
+                    }
+                }
+            }
         }
 
         public bool State
@@ -102,7 +121,7 @@ namespace SmartDolly
         public TimeSpan TotalTime
         {
             get { return _totalTime; }
-            set { Debug.WriteLine("Total time set to: " + Convert.ToString(_totalTime)); SetProperty(ref _totalTime, value); SetPropertyRemote(Property.TotalTime, Convert.ToInt32(_totalTime.TotalSeconds)); }
+            set { SetProperty(ref _totalTime, value); SetPropertyRemote(Property.TotalTime, Convert.ToInt32(_totalTime.TotalSeconds)); }
         }
 
         public TimeSpan ElapsedTime
@@ -114,7 +133,26 @@ namespace SmartDolly
         public int TotalShots
         {
             get { return _totalShots; }
-            set { SetProperty(ref _totalShots, value); SetPropertyRemote(Property.TotalShots, _totalShots); }
+            set
+            {
+                if (value < 1) value = 1;
+                SetProperty(ref _totalShots, value); SetPropertyRemote(Property.TotalShots, _totalShots);
+                if (TotalShotsLock)
+                {
+                    if (!IntervalLock)
+                    {
+                        Interval = Convert.ToInt32(TotalTime.TotalMilliseconds) / TotalShots;
+                    }
+                    if (!TotalTimeLock)
+                    {
+                        TotalTime = TimeSpan.FromMilliseconds(TotalShots * Interval);
+                    }
+                    if(!MotionPerCycleLock)
+                    {
+                        MotionPerCycle = MaxDistance / TotalShots;
+                    }
+                }
+            }
         }
 
         public int ShotsTaken
@@ -144,7 +182,26 @@ namespace SmartDolly
         public int MotionPerCycle
         {
             get { return _motionPerCycle; }
-            set { SetProperty(ref _motionPerCycle, value); SetPropertyRemote(Property.MotionPerCycle, _motionPerCycle); }
+            set
+            {
+                if (value < 1) value = 1;
+                SetProperty(ref _motionPerCycle, value); SetPropertyRemote(Property.MotionPerCycle, _motionPerCycle);
+                if (MotionPerCycleLock)
+                {
+                    if (!TotalShotsLock)
+                    {
+                        TotalShots = MaxDistance / MotionPerCycle;
+                    }
+                    if (!IntervalLock)
+                    {
+                        Interval = Convert.ToInt32(TotalTime.TotalMilliseconds) / TotalShots;
+                    }
+                    if (!TotalTimeLock)
+                    {
+                        TotalTime = TimeSpan.FromMilliseconds(TotalShots * Interval);
+                    }
+                }
+            }
         }
 
         public double BatVoltage
@@ -153,6 +210,11 @@ namespace SmartDolly
             set { SetProperty(ref _batVoltage, value); }
         }
 
+        public bool IntervalLock { get; set; }
+        public bool TotalTimeLock { get; set; }
+        public bool TotalShotsLock { get; set; }
+        public bool MotionPerCycleLock { get; set; }
+        public bool MaxDistanceLock { get; set; }
 
         public void getInitValues()
         {
@@ -192,10 +254,7 @@ namespace SmartDolly
             if (command == Command.GetResponse || command == Command.Set)
             {
                 newValueFromDevice = true;
-
                 Int32 newValue = Convert.ToInt32(messageArray[1]);
-
-//                properties[property] = newValue;
 
                 switch(property)
                 {
@@ -240,9 +299,11 @@ namespace SmartDolly
                     break;
                 case Property.Measuring:
                     Measuring = (newValue == 0) ? false : true;
+                    Debug.WriteLine("Should NEVER be here !!!");
                     break;
                 case Property.Homing:
                     Homing = (newValue == 0) ? false : true;
+                    Debug.WriteLine("Should NEVER be here !!!");
                     break;
 
                 }

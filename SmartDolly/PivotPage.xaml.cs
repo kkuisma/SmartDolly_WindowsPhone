@@ -309,11 +309,6 @@ namespace SmartDolly
         {
             DollyViewModel.Homing = true;
         }
-
-        private void BatteryLevelText_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 
     public class MainSwitchConverter : IValueConverter

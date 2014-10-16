@@ -47,21 +47,41 @@
                         <ColumnDefinition Width="227*"/>
                         <ColumnDefinition Width="143*"/>
                     </Grid.ColumnDefinitions>
+                    <Border Grid.Row="1" Grid.ColumnSpan="2">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF1C2330"/>
+                        </Border.Background>
+                    </Border>
+                    <Border Grid.Row="3" Grid.ColumnSpan="2">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF1C2330"/>
+                        </Border.Background>
+                    </Border>
+                    <Border Grid.Row="5" Grid.ColumnSpan="2">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF1C2330"/>
+                        </Border.Background>
+                    </Border>
+                    <Border Grid.Row="7" Grid.ColumnSpan="2">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF1C2330"/>
+                        </Border.Background>
+                    </Border>
                     <TextBlock x:Name="CurrentTimeValue" Grid.Column="0" Grid.Row="1" Text="{Binding ElapsedTime, ConverterParameter='{}{0}', Converter={StaticResource StringFormat}}" VerticalAlignment="Bottom" FontSize="48" Foreground="#FF3E67D6" Margin="5,0,0,0" HorizontalAlignment="Left" Height="58" Width="212">
                     </TextBlock>
                     <TextBlock x:Name="ShotsTakenValue" Grid.Column="0" Grid.Row="3" Text="{Binding ShotsTaken, ConverterParameter='{}{0:#0}', Converter={StaticResource StringFormat}}" VerticalAlignment="Center" FontSize="48" Foreground="#FF3E67D6" Margin="5,0,0,0" Height="58" HorizontalAlignment="Left" Width="212">
                     </TextBlock>
                     <TextBlock x:Name="CurrentPositionValue" Grid.Column="0" Grid.Row="5" Text="{Binding CurrentPosition, ConverterParameter='{}{0:#0}mm', Converter={StaticResource StringFormat}}" VerticalAlignment="Center" FontSize="48" Foreground="#FF3E67D6" Margin="5,0,0,0" HorizontalAlignment="Left" Height="58" Width="212">
                     </TextBlock>
-                    <TextBlock x:Name="BatteryLevelValue" Grid.Column="0" Grid.Row="7" Text="{Binding BatVoltage, ConverterParameter='{}{0:#0.0}V', Converter={StaticResource StringFormat}}" VerticalAlignment="Center" FontSize="48" SelectionChanged="BatteryLevelText_SelectionChanged" Foreground="#FF3E67D6" Margin="5,0,0,0" HorizontalAlignment="Left" Height="58" Width="212">
+                    <TextBlock x:Name="BatteryLevelValue" Grid.Column="0" Grid.Row="7" Text="{Binding BatVoltage, ConverterParameter='{}{0:#0.0}V', Converter={StaticResource StringFormat}}" VerticalAlignment="Center" FontSize="48" Foreground="#FF3E67D6" Margin="5,0,0,0" HorizontalAlignment="Left" Height="58" Width="212">
                     </TextBlock>
                     <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Text="Run Time:" VerticalAlignment="Center" FontSize="16" Margin="0,1,0,0" Height="19" Width="70"/>
                     <TextBlock x:Name="TotalTimeText" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Text="Total Time:" VerticalAlignment="Center" FontSize="16" Margin="0,1,0,0" Height="19" Width="76"/>
-                    <TextBlock x:Name="ShotsText" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Text="Shots Taken:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="87"/>
-                    <TextBlock x:Name="TotalShotsText" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Text="Total Shots:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="81"/>
-                    <TextBlock x:Name="PositionText" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" Text="Position:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="60"/>
-                    <TextBlock x:Name="MaxPositionText" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" Text="End position:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="92"/>
-                    <TextBlock x:Name="BatteryText" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Text="Battery:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="54"/>
+                    <TextBlock x:Name="ShotsText" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Text="Shots Taken:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,10,0,0" Width="87"/>
+                    <TextBlock x:Name="TotalShotsText" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Text="Total Shots:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,10,0,0" Width="81"/>
+                    <TextBlock x:Name="PositionText" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" Text="Position:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,10,0,0" Width="60"/>
+                    <TextBlock x:Name="MaxPositionText" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" Text="End position:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,10,0,0" Width="92"/>
+                    <TextBlock x:Name="BatteryText" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Text="Battery:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,10,0,0" Width="54"/>
                     <TextBlock x:Name="TotalTimeValue" HorizontalAlignment="Left" Text="{Binding TotalTime}" VerticalAlignment="Bottom" FontSize="22" Grid.Row="1" Foreground="#FF3E67D6" Grid.Column="1" Margin="0,0,0,12" Height="26" Width="133">
                     </TextBlock>
                     <TextBlock x:Name="TotalShotsValue" HorizontalAlignment="Left" Text="{Binding TotalShots}" VerticalAlignment="Bottom" FontSize="22" Grid.Row="3" Foreground="#FF3E67D6" Grid.Column="1" Margin="0,0,0,12" Height="26" Width="133">
@@ -70,20 +90,20 @@
                     </TextBlock>
                     <TextBlock x:Name="MaxBatValue" HorizontalAlignment="Left" Text="10.5V" VerticalAlignment="Bottom" FontSize="22" Grid.Row="7" Foreground="#FF3E67D6" Grid.Column="1" Margin="0,0,0,12" Height="26" Width="133">
                     </TextBlock>
-                    <TextBlock x:Name="LowBatteryLimitText" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="1" Text="Low battery limit:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,1,0,0" Width="133"/>
+                    <TextBlock x:Name="LowBatteryLimitText" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="1" Text="Low battery limit:" VerticalAlignment="Center" FontSize="16" Height="19" Margin="0,10,0,0" Width="133"/>
                 </Grid>
             </PivotItem>
             <PivotItem
                 x:Uid="DollyPivotItem"
-                Margin="10,10,10,130"
+                Margin="10,0"
                 Header="dolly"
                 DataContext="{Binding DollySettings}"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
-                <Grid x:Name="DollySettings" Width="360" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Grid x:Name="DollySettings" Width="360" VerticalAlignment="Top" HorizontalAlignment="Left" Height="380">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="115*" />
+                        <ColumnDefinition Width="128*" />
+                        <ColumnDefinition Width="117*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -94,43 +114,38 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="Interval" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
-                    <TextBox   Name="IntervalBox" Grid.Column="1" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
-                               Text="{Binding Interval,Mode=TwoWay}" Width="120" Background="{ThemeResource TextBoxBackgroundThemeBrush}" />
-                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="ms" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="Time" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
-                    <TimePicker Grid.Row="1" Name="TotalTimePicker" Grid.Column="2" Time="{Binding TotalTime,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" ClockIdentifier="24HourClock" />
-                    <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
-                    <TextBox   Grid.Row="1" Name="ElapsedTimeBox" Grid.Column="1" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
-                               Text="{Binding ElapsedTime,Mode=OneWay}" Background="{ThemeResource TextBoxBackgroundThemeBrush}" IsEnabled="False" BorderThickness="0" VerticalAlignment="Center" />
-                    <TextBlock Grid.Row="2" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="Shots" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
-                    <TextBox   Grid.Row="2" Name="ShotsTimeBox" Grid.Column="2" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
-                               Text="{Binding TotalShots,Mode=TwoWay}" Width="120" Background="{ThemeResource TextBoxBackgroundThemeBrush}" />
-                    <TextBox   Grid.Row="2" Name="ShotsTakenBox" Grid.Column="1" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
-                               Text="{Binding ShotsTaken,Mode=OneWay}" Background="{ThemeResource TextBoxBackgroundThemeBrush}" IsEnabled="False" BorderThickness="0" VerticalAlignment="Center" />
-                    <TextBlock Grid.Row="3" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="Position" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
-                    <TextBox   Grid.Row="3" Name="CurrentPositionBox" Grid.Column="1" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
-                               Text="{Binding CurrentPosition,Mode=OneWay}" Background="{ThemeResource TextBoxBackgroundThemeBrush}" BorderThickness="0" IsEnabled="False" VerticalAlignment="Center" />
-                    <TextBox   Grid.Row="3" Name="MaxPositionBox" Grid.Column="2" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
-                               Text="{Binding MaxDistance,Mode=OneWay}" Background="{ThemeResource TextBoxBackgroundThemeBrush}" BorderThickness="0" IsEnabled="False" VerticalAlignment="Center" />
-                    <TextBlock Grid.Row="4" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="Move / cycle" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
-                    <TextBox   Grid.Row="4" Name="MotionPerCycleBox" Grid.Column="1" HorizontalAlignment="Right" Margin="5" TextAlignment="Right" InputScope="Number"
-                               Text="{Binding MotionPerCycle,Mode=TwoWay}" Width="120" Background="{ThemeResource TextBoxBackgroundThemeBrush}" />
-                    <TextBlock Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"
-                               Text="mm" FontSize="{StaticResource ContentDialogTitleMinHeight}" />
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center"
+                               Text="Interval (ms)" FontSize="16" Height="23" Width="105" />
+                    <TextBox   Name="IntervalBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextAlignment="Right" InputScope="Number"
+                               Text="{Binding Interval,Mode=TwoWay}" Width="120" Background="{ThemeResource TextBoxBackgroundThemeBrush}" Height="38" VerticalAlignment="Center" IsEnabled="{Binding IsOn, ElementName=IntervalLockSwitch}" />
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center"
+                               Text="Time" FontSize="16" Height="23" Width="100" />
+                    <TimePicker Grid.Row="1" Name="TotalTimePicker" Grid.Column="1" Time="{Binding TotalTime,Mode=TwoWay}"  IsEnabled="{Binding IsOn, ElementName=TimeLockSwitch}"
+                                HorizontalAlignment="Center" Margin="9,0,10,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" ClockIdentifier="24HourClock" Height="58" Width="109" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="5,20,0,19" VerticalAlignment="Center"
+                               Text="" FontSize="{StaticResource ContentDialogTitleMinHeight}" Height="23" Width="0" d:IsHidden="True" />
+                    <TextBlock Grid.Row="2" HorizontalAlignment="Left" Margin="5,19,0,20" VerticalAlignment="Center"
+                               Text="Shots" FontSize="16" Height="23" Width="100" />
+                    <TextBox   Grid.Row="2" Name="ShotsBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextAlignment="Right" InputScope="Number" IsEnabled="{Binding IsOn, ElementName=ShotsLockSwitch}"
+                               Text="{Binding TotalShots,Mode=TwoWay}" Width="120" Background="{ThemeResource TextBoxBackgroundThemeBrush}" VerticalAlignment="Center" Height="38" />
+                    <TextBlock Grid.Row="3" HorizontalAlignment="Left" Margin="5,12,0,8" VerticalAlignment="Center"
+                               Text="Length (mm)" FontSize="16" Height="23" Width="100" />
+                    <TextBox   Grid.Row="3" Name="MaxPositionBox" Grid.Column="1" HorizontalAlignment="Right" Margin="0,14,11,11" TextAlignment="Right" InputScope="Number"
+                               Text="{Binding MaxDistance,Mode=TwoWay}" Background="{ThemeResource TextBoxBackgroundThemeBrush}" BorderThickness="0" IsEnabled="False" VerticalAlignment="Center" Height="33" Width="112" />
+                    <TextBlock Grid.Row="4" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center"
+                               Text="Step size (mm)" FontSize="16" Height="19" Width="118" Grid.ColumnSpan="2" />
+                    <TextBox   Grid.Row="4" Name="MotionPerCycleBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextAlignment="Right" InputScope="Number" IsEnabled="{Binding IsOn, ElementName=MoveLockSwitch}"
+                               Text="{Binding MotionPerCycle,Mode=TwoWay}" Width="120" Background="{ThemeResource TextBoxBackgroundThemeBrush}" Height="38" VerticalAlignment="Center" />
                     <ToggleButton Grid.Row="5" HorizontalAlignment="Center" IsChecked="{Binding State, Mode=TwoWay}"
-                               Name="StartStop" Content="{Binding State, Converter={StaticResource MainSwitch},Mode=TwoWay}" Width="100"/>
+                               Name="StartStop" Content="{Binding State, Converter={StaticResource MainSwitch},Mode=TwoWay}" Width="109" Margin="1,0,5,-30" VerticalAlignment="Bottom" Height="58" RenderTransformOrigin="0.442,1.088"/>
                     <Button    Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" Click="DoHoming_Click" 
-                               Name="DoHoming" Content="Go Home" Width="100"/>
-                    <Button    Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" Click="DoMeasuring_Click" 
-                               Name="DoMeasuring" Content="Measure" Width="100"/>
+                               Name="DoHoming" Content="Go Home" Width="109" Margin="12,0,7,-30" VerticalAlignment="Bottom" Height="58"/>
+                    <Button    Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Click="DoMeasuring_Click" 
+                               Name="DoMeasuring" Content="Measure" Width="109" Margin="9,0,-1,0" VerticalAlignment="Bottom" Height="58" FontSize="16"/>
+                    <ToggleSwitch Name="IntervalLockSwitch" IsOn="{Binding IntervalLock,Mode=TwoWay}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Top" Height="66" Width="115" Grid.ColumnSpan="2"/>
+                    <ToggleSwitch Name="TimeLockSwitch"     IsOn="{Binding TotalTimeLock,Mode=TwoWay}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Top" Height="62" Width="115" Grid.ColumnSpan="2"/>
+                    <ToggleSwitch Name="ShotsLockSwitch"    IsOn="{Binding TotalShotsLock,Mode=TwoWay}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Top" Height="62" Width="115" Grid.ColumnSpan="2"/>
+                    <ToggleSwitch Name="MoveLockSwitch"     IsOn="{Binding MotionPerCycleLock,Mode=TwoWay}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="109,0,0,0" VerticalAlignment="Top" Height="62" Width="115" Grid.ColumnSpan="2"/>
                 </Grid>
             </PivotItem>
             <PivotItem
